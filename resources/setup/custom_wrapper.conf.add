@@ -1,0 +1,5 @@
+
+# AppDynamics
+
+wrapper.java.additional.601=-Xbootclasspath/a:./packages/WxAppDynamicsAgent/resources/javaagent.jar:./packages/WxAppDynamicsAgent/resources/agent-api.jar:"%JAVA_BOOT_CLASSPATH%"
+wrapper.java.additional.602=-javaagent:./packages/WxAppDynamicsAgent/resources/javaagent.jar

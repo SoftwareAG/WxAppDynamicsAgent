@@ -1,0 +1,3 @@
+1650508744000
+io.opentelemetry.semconv.trace.attributes
+io.opentelemetry.semconv.resource.attributes

@@ -1,0 +1,341 @@
+#ENCRYPT
+#
+# TO Convert to JSON: https://codebeautify.org/yaml-to-json-xml-csv
+#############################################
+# Ground Rules
+#############################################
+#
+#  Match Object:
+#
+#     MatchObject must match the permission target as follows:
+#            If target starts with @ - then regex expression
+#            If target starts with > - then case sensitive starts with
+#            If target starts with = - then case sensitive exact match
+#            else case sensitive substring match
+#############################################
+# Version
+#############################################
+version: "1"
+#############################################
+# SQL Injection Vulnerability Event
+#############################################
+event_management_sql_injection:
+  # how long before to "be quiet" between events generated via non-parameterized sql query - default should be 60
+  security_event_unsafe_query_frequency_seconds: 60
+  block: false
+#############################################
+# Serialization Vulnerability Event
+#############################################
+event_management_serialization:
+  # how long before to "be quiet" between events generated via active class serialization - default should be 60
+  security_event_unsafe_serialization_frequency_seconds: 60
+  # Ignore these classes
+  ignore_serialized_classes:
+    - ">javax."
+    - ">java."
+    - ">sun."
+    - ">com.sun"
+  # blocking
+  block: false
+  # We only care about overrides - those classes overriding readObject
+  override_only: true
+  # Serialization action?
+  active: true
+#############################################
+# Security Exceptions
+#############################################
+event_management_exceptions:
+  # One of these must match to event on the Exception
+  # Java.lang.SecurityException or inherited - Must be a real class Name
+  event_include_exception_class_type:
+    - java.lang.SecurityException
+    - java.security.GeneralSecurityException
+    - javax.net.ssl.SSLException
+    # Login Exception or inherited (Failure, etc.) - Iterative Match Object List
+  event_exclude_exception_class_type:
+    - javax.crypto.AEADBadTagException
+    - javax.crypto.BadPaddingException
+  event_include_exception_class_name:
+    - javax.security.auth.login.LoginException
+  # Login Failed in the Exception message -Iterative  Match Object List
+  event_include_exception_msg_contains:
+    - Login failed
+  event_exclude_exception_msg_contains:
+    - >Received fatal alert: certificate_unknown
+    - >closing inbound before receiving peer's close_notify
+
+#############################################
+# Permission Requests
+#############################################
+event_management_permissions:
+  # Allow Security Manager
+  event_security_manager_enabled:  true
+  # How long to wait after startup before Permission events are generated
+  event_permission_after_sec: 20
+  # Allow these events to be written to stdout
+  event_stdout: false
+  # Used to Track Learned Excludes
+  event_track_learned_events: true
+  # Run in lean mode (i.e., exclude Permission Target, etc.)
+  event_track_learned_events_lean_mode: false
+  # Record full stack trace (should be done if doing excludes)
+  event_track_learned_events_record_stack: false
+  # Maximum Learned Excludes to track
+  event_max_track_learned_events: 1000
+  # Used to Auto Write Learned Excludes
+  event_auto_write_learned_excludes: false
+  # Log all Permission Requests - remove filename to disable logging
+  event_permissions_log_file: ""
+  #
+  # Permission Filters - to determine what Permission Requests will be processed as a "sensitive operation" and generate event and/or be blocked
+  #     Permission Names must be a valid JVM name - see https://docs.oracle.com/javase/7/docs/technotes/guides/security/permissions.html
+  #     Actions must be a valid action for the Permission
+  #     Targets must match the Iterative Match Object List
+  #
+  # OK for Web:
+  #
+  # ServletContext servletContext = filterConfig.getServletContext();
+  #		String contextPath = servletContext.getRealPath(File.separator);
+  #     includes=!webcontext unless=xyz in stack
+  #
+  event_include_permission_filter:
+    # FilePermission - write/execute/delete - for any file
+    - permission: FilePermission
+      action:
+        - write
+        - delete
+      filters:
+        - name: Exclude Folders
+          exclude_targets:
+              - ">$APM_AGENT_DIR$"
+              - ">$APPLICATION_DIRECTORY$"
+          exclude_stacks: []
+          include_stacks: []
+          exclude_headers: []
+          include_headers: []
+          exclude_parameters: []
+          include_parameters: []
+          exclude_threads: []
+          include_threads: []
+          block: false
+          active: true
+          message: Security event - attempting to alter File Content
+    - permission: FilePermission
+      action:
+        - execute
+      filters:
+        - name: Include Everyone
+          include_targets:
+              - "*"
+          block: true
+          active: true
+          message: Invalid launch of a Remote Command Execution
+    - permission: FilePermission
+      action:
+        - read
+      filters:
+        - name: Exclude Server Folders
+          exclude_targets:
+              - ">$APM_AGENT_DIR$"
+              - ">$ARGENTO_AGENT_DIR$"
+              - ">$APPLICATION_DIRECTORY$"
+              - ">$DOMAIN_HOME$"
+              - ">$JAVA_HOME$"
+          block: false
+          active: true
+          message: Security event - attempting to read a File
+      # SocketPermission - listen/connect/accept - for any IP
+    - permission: SocketPermission
+      action:
+        - connect
+      filters:
+        - name: Include All Addresses
+          include_targets:
+            - "*"
+          message: Security event - attempting to connect to Host
+    - permission: SocketPermission
+      action:
+        - listen
+      filters:
+        - name: Include All Addresses
+          include_targets:
+              - "*"
+          message: Security event - attempting to launch a Server on a local port
+          block: true
+          active: true
+  # Do not event if this is found in the Stack Trace (Array of Class/Method strings compare with Iterative Match Object List)
+  event_exclude_permission_stack_filter:
+    - never gonna match
+  # 22.3 - this now hard coded in Agent Policy - not in real policy
+  event_exclude_permission_action_filter:
+    - SocketPermission:accept
+
+#############################################
+# Management Server
+#############################################
+
+management_server:
+  # Heartbeat cadence for policy updates/etc.
+  management_server_heartbeat_sec: 60
+  # How long after startup before starting the heartbeat
+  management_server_heartbeat_start_sec: 30
+  # Auth Service - how man failures at startup before failure mode
+  auth_service_failure_mode_count: 10
+  # Auth Service - failure mode factor
+  auth_service_failure_mode_factor: 1
+
+
+#############################################
+# Transaction Processing
+#############################################
+
+transaction_processing:
+  # Don't track transaction if the request getContentType - Iterative Match Object List
+  exclude_transaction_content_type:
+    - image
+  # Don't track transaction if the request URL - Iterative Match Object List
+  exclude_transaction_url:
+    - .ico
+    - .jpg
+    - .gif
+    - /argentoMgmtService
+  exclude_transaction_servlet_filter: true
+  # Look for these roles for the Username - if found - add to event - no way to get these via API - have to try them
+  check_these_user_roles:
+    - user
+    - guest
+    - admin
+  # Add these HTTP Security Headers to the Transaction response
+  add_security_headers:
+    - "Strict-Transport-Security: max-age=16070400; includeSubDomains"
+    - "X-Frame-Options: SAMEORIGIN"
+    - "X-XSS-Protection: 1; mode=block"
+    - "X-Content-Type-Options: nosniff"
+  # Check these HTTP Security Headers to the Transaction response
+  check_security_headers:
+    - "Strict-Transport-Security"
+    - "X-Frame-Options"
+    - "X-XSS-Protection"
+    - "X-Content-Type-Options"
+  # Look for a Cisco inbound command in this header
+  argento_request_control_header: argento.commandHeader
+  # Add this HTTP Header to the Transacton response will contain the Transaction Id/Event Id
+  argento_event_id_headers: argento.eventid
+  # how long before to "be quiet" between events generated via an unsafe Cookie sent by the Application (default should be 1440)
+  security_event_unsafe_cookie_frequency_seconds: 60
+  exclude_cookies: []
+  # Check for non secure HTTP - how long before to "be quiet" between events
+  security_event_non_encrypted_http_frequency_seconds: 60
+  block_non_encrypted_http: false
+  # Check for unauthenticated User - block_unauthenticated_user not working yet - how long before to "be quiet" between events
+  security_event_unauthenticated_user_frequency_seconds: 60
+  block_unauthenticated_user: false
+
+#############################################
+# Event Processing
+#############################################
+
+event_processing:
+  # Event batch size before flushing queue
+  event_batch_flush_size: 50
+  # Event batch timeout/age before flushing queue
+  event_batch_flush_time_msec: 5000
+  # Event thread pool size
+  event_thread_pool_size: 5
+  # Event retransmission queue
+  event_retransmission_queue_size: 5000
+  # UDP Beacons array of Strings in format address:port
+  event_beacons: []
+  # Add HTTP header (see argento.event.id.headers) to Transaction response
+  event_add_id_header: true
+  # Do log events in .json (in the events dir) as well log content in main log file
+  event_log: false
+  # Add a full code stack showing location of the event in the event content
+  event_provide_stack: true
+  event_exclude_threads: []
+  # Event callback folder for SDK Callbacks
+  event_callback_dir: sdk/prod/lib
+  # Event callback implementation for SDK Callbacks (is a sample)
+  event_callback_load: custom.CustomSecurityEventInlineCallbackHandler
+  # Add HTTP Headers to events
+  event_add_http_headers: false
+  # Add HTTP Params to events
+  event_add_http_params: false
+  # Allow Events on non-Transactions period
+  event_allow_non_transactions: true
+  # Allow Events on non-Transactions if matching these threads
+  non_transactions_thread_filter: []
+  # Reporting Retry Times
+  event_reporting_retries: 10
+  # Reporting Retry Interval
+  event_reporting_retry_interval_msec: 5000
+  # Event After First Transaction
+  event_wait_first_transaction: true
+  # Max event add content size
+  event_max_add_content_size: 512
+  # How long before to "be quiet" between events
+  event_frequency_seconds: 60
+  # 21.12 - No Events if on the stack - this hard coded now in AgentPolicy
+  event_exclude_on_stack:
+    - com.appdynamics
+    - com.singularity
+  # Sensitive Data Regex Default - added 22.4
+  masking-sensitive-data-list: []
+  # Sensitive Data Regex For Events - added 22.4
+  masking-sensitive-data-list-events: []
+
+#############################################
+# Transaction Blocking Processing
+#############################################
+
+transaction_blocking_processing:
+  # Erase stack trace so it is not displayed when blocked
+  event_block_erase_stack: true
+  # Client IPs to Block - MatchObject
+  event_block_client_ips: []
+  # Client IPs to Block from Talos - String Array
+  event_block_talos_ips: []
+  # Inbound Client URLs to Block - MatchObject
+  event_block_inbound_urls: []
+
+
+#############################################
+# Vulnerability Assessment
+#############################################
+
+vulnerability_assessment:
+  # Enabled or not - NOTE: Talos IP blocklist check is connected to this - needs to change
+  enabled: true
+  # Show all jars including those with no vulnerabilities
+  show_all_jars: true
+  # Military Time to check for Vulnerabilities (don't use with audit_first_audit_seconds)
+  # audit_at_time=8:00
+  # Interval to check for Vulnerabilities
+  audit_delta_minutes: 1440
+  # How long after startup to check for Vulnerabilities (don't use with audit_at_time)
+  audit_first_audit_seconds: 60
+  # Exclude jar if matching any of these Array of class name substrings
+  exclude_class:
+    - "["
+    - "com.singularity"
+    - "com.appdynamics"
+    - "com.cisco.argento"
+    - "com.cisco.mtagent"
+  # Exclude jar if matching any of these Array of class loader name substrings
+  exclude_loader:
+    - "com.singularity"
+  # Number of threads to use in checking vulnerabilities
+  processing_threads: 10
+  # Time to pause between vulnerability check of a jar
+  processing_throttle_msec: 0
+  # Considered unsafe Cipher list - used to report runtime vulnerability
+  ssl_cipher_blocklist:
+    - SSL_RSA_WITH_3DES_EDE_CBC_SHA
+  # Considered unsafe Protocol list - used to report runtime vulnerability
+  ssl_protocol_blocklist:
+    - SSLv2Hello
+    - SSLv3
+    - TLSv1
+
+
+#END-ENCRYPTION

@@ -1,0 +1,78 @@
+agent-instrumentation-properties:
+  preloadClasses:
+  noTransformClass: com.cisco.mtagent,com.cisco.argento,com.singularity,com.appdynamics
+  noTransformLoaderClassName: com.cisco.mtagent,com.cisco.argento,com.singularity,com.appdynamics
+  noOsgiBootDelegationSet: was.install.root
+  noTransformThreadName:
+  classReviewInterval: 10
+  useClassDefinitionTransform: true
+  useAnonymousClassTransform: true
+  trackReviewedClasses: false
+  useInitialTransform: false
+  showJMX: false
+  ctClassCacheClearSeconds: 180
+
+agent-misc-settings:
+  sslProtocol: TLSV1.2
+  version: 22.4.0-773
+
+
+agent-logging:
+  initialMaxLogSize: 2000000
+  maxLogSize: 1000000
+  maxLogs: 10
+  maxLogMsgsPerSecond: 100
+  maxLoggingQueueSize: 1000
+  showDecryptedFiles: true
+  useLocking: false
+  # Need double slash for escaping
+  masking-sensitive-data-list:
+
+agent-reflection-list:
+
+
+#ENCRYPT
+
+#
+# Async Instrumentation - all disabled right now
+#
+
+agent-internal-handlers:
+    - class: java.lang.Runnable
+      method: run
+      handler: com.cisco.mtagent.async.AsynchCorrelationInternalHandler
+      interface: true
+      excludeclass: java.util.concurrent.ThreadPoolExecutor$Worker,java.lang.Thread,java.util.concurrent.FutureTask
+      active: false
+
+    - class: java.util.concurrent.Callable
+      method: call
+      handler: com.cisco.mtagent.async.AsynchCorrelationInternalHandler
+      interface: true
+      excludeclass: java.util.concurrent.Executors$RunnableAdapter
+      active: false
+
+    - class: java.lang.Thread
+      method: start
+      handler: com.cisco.mtagent.async.AsynchCorrelationInternalHandler
+      active: false
+
+    - class: java.util.concurrent.ThreadPoolExecutor
+      method: execute
+      handler: com.cisco.mtagent.async.AsynchCorrelationInternalHandler
+      interface: true
+      active: false
+
+    - class: java.util.concurrent.AbstractExecutorService
+      method: submit
+      handler: com.cisco.mtagent.async.AsynchCorrelationInternalHandler
+      interface: true
+      active: false
+
+    - proxy: true
+      handler: com.cisco.mtagent.instrumentation.InstrumentationClassLoadingProxyInternalHandler
+      condition: multi.tenant.agent.unit.testing
+      active: true
+
+
+#END-ENCRYPTION

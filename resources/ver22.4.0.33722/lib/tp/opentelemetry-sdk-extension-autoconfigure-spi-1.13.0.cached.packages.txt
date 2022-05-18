@@ -1,0 +1,3 @@
+1650508744000
+io.opentelemetry.sdk.autoconfigure.spi
+io.opentelemetry.sdk.autoconfigure.spi.traces

@@ -1,0 +1,15 @@
+1650508744000
+com.singularity.ee.agent.util.cache
+com.singularity.ee.util.thread
+com.singularity.ee.util.reflect
+com.singularity.ee.agent.appagent.kernel.config.acnp
+com.singularity.ee.agent.util.tasks
+com.singularity.ee.agent.util.log4j
+com.singularity.ee.util.properties
+com.singularity.ee.agent.util.thread
+com.singularity.ee.util.dtobootimpl
+com.singularity.ee.agent.util.reflect
+com.singularity.ee.util.collections
+com.singularity.ee.agent.util.io
+com.singularity.ee.agent.util.bounded.collections
+com.singularity.ee.agent.util.exception
