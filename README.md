@@ -32,7 +32,7 @@ Then restart your runtime server. Open the admin portal and click on Packages ->
 The screen shows if the connection is already established and the last few lines of the agent log file.
 Below that it shows the current configuration of your webMethods runtime and also indicates if the server is not yet configured.
 
-In your case the server will show as not yer configured so click on the merge button to add the AppDynamics java agent to the configuration file for webMethods, but first check for any discrepancies and that any sequence numbers are not already in use. Once you have clicked on the merge button, the page will ask you to restart the server or in the case of a webMethods edge (Microservices Runtime) to stop and then restart the server.
+In your case the server will show as not yet configured so click on the merge button to add the AppDynamics java agent setup to the webMethods configuration file, but first check for any discrepancies and that any sequence numbers are not already in use. Once you have clicked on the merge button the page will ask you to restart the server or in the case of a webMethods edge (Microservices Runtime) to stop and then restart the server.
 
 Don't restart your server yet as you still need to configure the connection to your AppDynamics server. Refer to the section below.
 
@@ -69,7 +69,7 @@ For a full description of configuring the AppDynamics agent click [here](https:/
 
 Where it refers to \<agent-home\> this will be \<SAG_HOME\>/IntegrationServer/instances/default/packages/WxAppDynamicsAgent/resources
 
-or Where it refers to \<agent-home\> this will be \<SAG_HOME\>/IntegrationServer/packages/WxAppDynamicsAgent/resources for our MSR variant.
+or \<SAG_HOME\>/IntegrationServer/packages/WxAppDynamicsAgent/resources for our MSR variant.
 
 You can sign up for a free AppDynamics account here
 
