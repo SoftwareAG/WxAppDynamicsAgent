@@ -1,4 +1,4 @@
-# WxAppDynamics
+# WxAppDynamicsAgent
 
 webMethods package for integrating webMethods Integration Server with AppDynamics
 
