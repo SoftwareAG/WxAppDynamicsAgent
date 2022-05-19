@@ -61,7 +61,7 @@ You will also need to identify your webMethods server correctly, again this is c
 - APPDYNAMICS_AGENT_TIER_NAME
 - APPDYNAMICS_AGENT_NODE_NAME
 
-NOTE: The node name must be unique, by default it is set to your server's host name
+NOTE: The node name must be unique, by default it is set to ${HOSTNAME}.wm. Therefore make sure that you have the set environment variable HOSTNAME before startup if you don't want to change this value.
 
 Environment variables can be passed into a container via the -e switch.
 
