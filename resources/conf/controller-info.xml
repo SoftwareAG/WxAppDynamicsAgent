@@ -66,7 +66,7 @@
     You can use expressions like ${server.name}_${host.name}.MyNode to define the node name.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_NODE_NAME' or
     the system property '-Dappdynamics.agent.nodeName' -->
-    <node-name>${host.name}.wm</node-name>
+    <node-name>IS</node-name>
 
     <!-- The runtime directory for all runtime files (logs, transaction configuration) for agent nodes using this agent
     installation. This optional property defaults to the agent-installation-directory . If you specify a different directory,

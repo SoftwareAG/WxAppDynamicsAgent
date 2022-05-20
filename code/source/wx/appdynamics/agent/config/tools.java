@@ -213,6 +213,7 @@ public final class tools
 		// [i] field:0:required fname
 		// [o] field:0:required exists {"true","false"}
 		// [o] field:0:optional isDir
+		// [o] field:0:optional found
 		//filePath pipeline in
 		
 		IDataCursor pipelineCursor = pipeline.getCursor();
@@ -223,12 +224,29 @@ public final class tools
 		boolean exists = new File(fname).exists();
 		boolean isDir = new File(fname).isDirectory();
 		
+		String childName = null;
+		
+		if (isDir) {
+			String[] files = new File(fname).list();
+			
+			if (files.length > 0) {
+				childName = files[files.length-1];
+			} else {
+				exists = false;
+			}
+		}
+		
 		// pipeline out
 		
 		IDataUtil.put(pipelineCursor, "exists", "" + exists);
 		
-		if (exists)
+		if (exists) {
 			IDataUtil.put(pipelineCursor, "isDir", "" + isDir);
+			
+			if (childName != null) {
+				IDataUtil.put(pipelineCursor, "found", new File(new File(fname), childName).getPath());
+			}
+		}
 		
 		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
@@ -342,6 +360,8 @@ public final class tools
 		
 		int max = -1;
 		
+		System.out.println("fname " + fname);
+		
 		try {max = Integer.parseInt(maxLines);} catch (Exception e) {}
 		
 		if (fname.contains("*")) {
@@ -365,7 +385,7 @@ public final class tools
 				});
 			}
 			
-			if (files.length > 0)
+			if (files != null && files.length > 0)
 				fname = files[files.length-1].getAbsolutePath();
 			
 		}
