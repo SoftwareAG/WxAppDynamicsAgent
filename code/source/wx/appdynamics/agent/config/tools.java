@@ -277,6 +277,33 @@ public final class tools
 
 
 
+	public static final void last (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(last)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:required path
+		// [o] field:0:required filename
+		// pipeline in
+		
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String path = IDataUtil.getString(pipelineCursor, "path");
+		
+		// process
+		
+		String filename = new File(path).getName();
+		
+		// pipeline out
+		
+		IDataUtil.put(pipelineCursor, "filename", filename);
+		pipelineCursor.destroy();
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void readFile (IData pipeline)
         throws ServiceException
 	{
@@ -440,51 +467,6 @@ public final class tools
 		IDataUtil.put(pipelineCursor, "outString", outString);
 		pipelineCursor.destroy();
 			
-		// --- <<IS-END>> ---
-
-                
-	}
-
-
-
-	public static final void reverseTokenize (IData pipeline)
-        throws ServiceException
-	{
-		// --- <<IS-START(reverseTokenize)>> ---
-		// @sigtype java 3.5
-		// [i] field:0:required inString
-		// [i] field:0:required delim
-		// [o] field:1:required valueList
-		// [o] field:0:required last
-		// pipeline in
-		
-		IDataCursor pipelineCursor = pipeline.getCursor();
-		String inString = IDataUtil.getString(pipelineCursor, "inString");
-		String delim = IDataUtil.getString(pipelineCursor, "delim");
-		
-		// process
-		
-		String[] valueList = null;
-		
-		if (delim == null)
-			delim = ",";
-		
-		if (inString != null) {
-			
-			StringTokenizer tk = new StringTokenizer(inString, delim);
-			int count = tk.countTokens();
-			valueList = new String[count];
-			
-			while (tk.hasMoreTokens()) {
-				valueList[--count] = tk.nextToken();
-			}
-		}
-		
-		// pipeline out
-		
-		IDataUtil.put(pipelineCursor, "valueList", valueList);
-		IDataUtil.put(pipelineCursor, "last", valueList[valueList.length-1]);
-		pipelineCursor.destroy();
 		// --- <<IS-END>> ---
 
                 
