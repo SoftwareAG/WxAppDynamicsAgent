@@ -4304,6 +4304,9 @@
 
 <MAPCOPY FROM="/upDate;3.9;0" TO="/date1;3.9;0">
 </MAPCOPY>
+
+<MAPCOPY FROM="/logDate;3.9;0" TO="/date2;3.9;0">
+</MAPCOPY>
 </MAP>
 
 <MAP MODE="OUTPUT">
@@ -4325,6 +4328,18 @@
         <value name="node_subtype">unknown</value>
         <value name="is_public">false</value>
         <value name="field_name">date1</value>
+        <value name="field_type">object</value>
+        <value name="field_dim">0</value>
+        <value name="wrapper_type">java.util.Date</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">unknown</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">date2</value>
         <value name="field_type">object</value>
         <value name="field_dim">0</value>
         <value name="wrapper_type">java.util.Date</value>
@@ -4603,6 +4618,9 @@
   <!-- nodes -->
 
 <MAPDELETE FIELD="/date1;3.9;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/date2;3.9;0">
 </MAPDELETE>
 </MAP>
 </INVOKE>
