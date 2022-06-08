@@ -1,6 +1,6 @@
 
 :: AppDynamics monitoring options
 
-set JAVA_APPDYNAMICS_OPTS=-javaagent:".\packages\WxAppDynamicsAgent\resources\javaagent.jar=logging.dir=.\logs\" -Xbootclasspath/a:.\packages\WxAppDynamicsAgent\resources\javaagent.jar:.\packages\WxAppDynamicsAgent\resources\agent-api.jar:%JAVA_BOOT_CLASSPATH%
+set JAVA_APPDYNAMICS_OPTS=-javaagent:".\packages\WxAppDynamicsAgent\resources\javaagent.jar" -Xbootclasspath/a:.\packages\WxAppDynamicsAgent\resources\javaagent.jar:.\packages\WxAppDynamicsAgent\resources\agent-api.jar:%JAVA_BOOT_CLASSPATH%
 
 set JAVA_CUSTOM_OPTS=%JAVA_CUSTOM_OPTS% %JAVA_APPDYNAMICS_OPTS%
