@@ -386,9 +386,7 @@ public final class tools
 		// process
 		
 		int max = -1;
-		
-		System.out.println("fname " + fname);
-		
+				
 		try {max = Integer.parseInt(maxLines);} catch (Exception e) {}
 		
 		if (fname.contains("*")) {
@@ -404,16 +402,15 @@ public final class tools
 				files = fileNameWithWithCard.getParentFile().listFiles(new FileFilter() {
 					
 					@Override
-					public boolean accept(File pathname) {
-						System.out.println(pathname.getName() + " === " + match);
-						
+					public boolean accept(File pathname) {						
 						return (pathname.getName().matches(match));
 					}
 				});
 			}
 			
-			if (files != null && files.length > 0)
-				fname = files[files.length-1].getAbsolutePath();
+			if (files != null && files.length > 0) {
+				fname = files[0].getAbsolutePath();
+			}
 			
 		}
 		

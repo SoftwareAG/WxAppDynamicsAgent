@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <business-transactions>
-    <struts-action-entry-points enabled="true">
+    <struts-action-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
@@ -10,7 +10,7 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </struts-action-entry-points>
-    <web-service-entry-points enabled="true">
+    <web-service-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
@@ -20,7 +20,7 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </web-service-entry-points>
-    <servlet-entry-points enabled="true">
+    <servlet-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
@@ -96,7 +96,7 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </servlet-entry-points>
-    <ejb-entry-points enabled="true">
+    <ejb-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
@@ -106,7 +106,7 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </ejb-entry-points>
-    <spring-bean-entry-points enabled="true">
+    <spring-bean-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
@@ -116,7 +116,7 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </spring-bean-entry-points>
-    <pojo-entry-points enabled="true">
+    <pojo-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
@@ -126,7 +126,7 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </pojo-entry-points>
-    <jms-entry-points enabled="true">
+    <jms-entry-points enabled="false">
         <custom>
         </custom>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">

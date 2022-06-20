@@ -6062,5 +6062,23 @@
 
 <MAPDELETE FIELD="/filters;1;1">
 </MAPDELETE>
+
+<MAPDELETE FIELD="/maxLines;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/found;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/matchedFile;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/matchedFileName;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/logDate;3.9;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/upDate;3.9;0">
+</MAPDELETE>
 </MAP>
 </FLOW>
