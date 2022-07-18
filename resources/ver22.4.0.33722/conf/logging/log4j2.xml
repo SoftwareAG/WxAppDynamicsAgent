@@ -73,6 +73,12 @@
         <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceInterceptor" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
         </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HttpContextInterceptor" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.ApiGatewayInterceptor" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </AsyncLogger>
         <Root level="error">
             <AppenderRef ref="DefaultAppender"/>
         </Root>
