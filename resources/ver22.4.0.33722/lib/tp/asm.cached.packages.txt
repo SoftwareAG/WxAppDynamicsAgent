@@ -1,7 +1,0 @@
-1650508744000
-com.singularity.asm.org.objectweb.asm.tree
-com.singularity.asm.org.objectweb.asm.signature
-com.singularity.asm.org.objectweb.asm.util
-com.singularity.asm.org.objectweb.asm
-com.singularity.asm.org.objectweb.asm.tree.analysis
-com.singularity.asm.org.objectweb.asm.commons

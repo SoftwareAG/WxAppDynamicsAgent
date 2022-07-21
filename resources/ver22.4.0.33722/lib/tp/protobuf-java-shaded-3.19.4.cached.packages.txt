@@ -1,3 +1,0 @@
-1650508744000
-com.google.protobuf
-com.google.protobuf.compiler

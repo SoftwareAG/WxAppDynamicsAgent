@@ -1,5 +1,0 @@
-1650508744000
-org.apache.http.impl.client.cache.memcached
-org.apache.http.impl.client.cache
-org.apache.http.client.cache
-org.apache.http.impl.client.cache.ehcache
