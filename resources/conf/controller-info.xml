@@ -48,7 +48,7 @@
     the Controller creates one automatically.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_APPLICATION_NAME' or
     the system property '-Dappdynamics.agent.applicationName' -->
-    <application-name>WM_IS</application-name>
+    <application-name>WM-IS</application-name>
 
     <!-- The logical business tier this node belongs to.
     For example, a tier can be 'ACME Frontend' or 'ACME Backend Service' etc.
