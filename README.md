@@ -74,3 +74,10 @@ or \<SAG_HOME\>/IntegrationServer/packages/WxAppDynamicsAgent/resources for our 
 You can sign up for a free AppDynamics account here
 
 [AppDynamics free trial signup page](https://www.appdynamics.com/free-trial/)
+
+# ADVANCED USE
+
+Use the following environment variables as follows
+
+APPDYNAMICS_REPORT_CHILD_ERRORS - set this to true to force tracing of all exceptions even if they are caught and managed by top level services
+APPDYNAMICS_USE_SET_TRANSACTION_NAME - set this to true to trace transactions from http level and set transaction name via setTransactionName() method.
