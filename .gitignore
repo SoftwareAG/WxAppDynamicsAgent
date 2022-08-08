@@ -5,3 +5,4 @@ resources/ver22.4.0.33722/logs
 resources/ver22.4.0.33722/conf/IS
 *.bak
 *.*.bak
+*.*.*.txt
