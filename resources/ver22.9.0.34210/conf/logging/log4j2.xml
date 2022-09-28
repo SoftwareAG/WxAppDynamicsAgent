@@ -49,7 +49,7 @@
             <AppenderRef ref="DefaultAppender"/>
             <AppenderRef ref="RESTAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.BusinessTransactions" level="info" additivity="false">
+        <AsyncLogger name="com.singularity.BusinessTransactions" level="debug" additivity="false">
             <AppenderRef ref="BusinessTransactionsLogger" />
         </AsyncLogger>
         <AsyncLogger name="com.singularity.dynamicservice" level="info" additivity="false">
@@ -64,7 +64,7 @@
         <AsyncLogger name="com.singularity.BCTLogger" level="info" additivity="false" >
             <AppenderRef ref="BCTAppender"/>
         </AsyncLogger>
-        <AsyncLogger name ="com.singularity.api" level="info" additivity="false">
+        <AsyncLogger name ="com.singularity.api" level="debug" additivity="false">
             <AppenderRef ref="APIAppender"/>
         </AsyncLogger>
         <AsyncLogger name="com.singularity.segment.TxnTracer" level="info" additivity="false">
