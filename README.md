@@ -81,3 +81,6 @@ Use the following environment variables as follows
 
 APPDYNAMICS_REPORT_CHILD_ERRORS - set this to true to force tracing of all exceptions even if they are caught and managed by top level services
 APPDYNAMICS_USE_SET_TRANSACTION_NAME - set this to true to trace transactions from http level and set transaction name via setTransactionName() method.
+
+______________________
+These tools are provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement. While Software AG welcomes contributions, we cannot guarantee to include every contribution in the master project.
