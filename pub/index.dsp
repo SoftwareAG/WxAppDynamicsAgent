@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/WmRoot/webMethods.css">
     <link rel="stylesheet" type="text/css" href="/WmRoot/top.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="delite.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 <script>
@@ -19,23 +20,18 @@
 </script>
 </head>
 <body style="overflow-y: scroll; padding: 0px" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
-  <form method="post" id="form" action=".">
-    <div class="tdmasthead" id="top" height="50px">
-      <div style="float:right; padding: 10px">
-          <img src="./resources/sag-logo-white@3x.png" height="25px"/>
-      </div>
-      <div class="saglogo" style="display: flex; align-items: center;">
-          <img src="./resources/wm-microservice-runtime.svg" height="50px" alt="webMethods.io End to End Monitor"/>
-      </div>
+<header class="no-margin no-padding main-head">
+  <a class="brand" href="/">
+    <div style="display: inline-flex;">
+      <img src="images/sag-primary-logo-dark-rgb.png" height="32px" style="margin-top: 10px"/>
+    </div>
+  </a>
+  <div class="wrapper" style="margin-left:auto; margin-right:12px;">
+    <h1 class="dlt-links" style="margin-right: 40px; margin-top: 10px">AppDynamics Agent</legend>
   </div>
-    <table width="100%">
-      <tr>
-        <td class="menu-navigator" style="border:none" colspan=2>packages &gt; WxAppDynamicsAgent &gt; <b>Status & Configuration</b>
-        </td>
-      </tr>
-	  </table>
-    <div style="margin:20px;">
-
+</header>
+  <form method="post" id="form" action=".">
+    <div style="margin:20px; margin-top: 64px;">
       <div style="padding: 20px">
         %ifvar actionType -notempty%
           <div style="margin-bottom: 20px; padding: 10px; background-color: pink; min-height: 50px; border-left: 1px solid red">
@@ -43,7 +39,7 @@
               %invoke wx.appdynamics.agent.config:restore%
                 %ifvar success equals('true')%
                 Successfully restored configuration, %ifvar serverType equals('IS')%Please restart the server to disable the interceptor.%else%stop the server and restart%endif%
-                <button type="submit" class="pill-button" style="float: right; background-color: red; font-size: 14px" onClick="setAction('reboot')">%ifvar serverType equals('IS')%restart%else%shutdown%endif%</button>
+                <button type="submit" class="dlt-button dlt-button-primary" style="float: right; background-color: red; font-size: 14px" onClick="setAction('reboot')">%ifvar serverType equals('IS')%restart%else%shutdown%endif%</button>
                 %else%
                 Ouch, no backup file found!
                 %endif%
@@ -52,8 +48,8 @@
             %ifvar actionType equals('merge')%
               %invoke wx.appdynamics.agent.config:merge%
                 %ifvar success equals('true')%
-                  %value configFileNam% has been updated, %ifvar serverType equals('IS')%Please restart the server to enable the interceptor.%else%stop the server and restart%endif%
-                  <button type="submit" class="pill-button" style="float: right; background-color: red; font-size: 14px" onClick="setAction('reboot')">%ifvar serverType equals('IS')%restart%else%shutdown%endif%</button>
+                  %value configFileName% has been updated, %ifvar serverType equals('IS')%Please restart the server to enable the interceptor.%else%stop the server and restart%endif%
+                  <button type="submit" class="dlt-button dlt-button-primary" style="float: right; background-color: red; font-size: 14px" onClick="setAction('reboot')">%ifvar serverType equals('IS')%restart%else%shutdown%endif%</button>
                 %endif%
               %endinvoke%
             %endif%
@@ -77,7 +73,7 @@
             Started at:<b>%value lastConnectionStatus%</b>
             <textarea id="status" name="status" style="margin-top: 10px; margin-bottom: 10px; width: 100%; height: 150px" readonly>%value logFile%</textarea>
             <p style="margin-top: -10px; font-size: x-small">%value matchedFile%</p>
-            <a href="." style="float: right; background-color: blue; color: white" class="pill-button">refresh</a>
+            <a href="." class="dlt-button dlt-button-primary" style="float: right; background-color: blue; color: white">refresh</a>
           </div>
         %endinvoke%
       </div>
@@ -105,7 +101,7 @@
               %else%
                 <b style="pading-top: 20px">e2e additions to be appended to the above file</b>
                 <textarea name="configFileAddition" style="margin-top: 10px; margin-bottom: 10px; width: 100%; height: 80px">%value configFileAddition%</textarea>
-                <button type="submit" class="pill-button" style="float: right; background-color: red; font-size: 14px" onClick="setAction('merge')">merge</button>
+                <button type="submit" class="dlt-button dlt-button-primary" style="float: right; background-color: red; font-size: 14px" onClick="setAction('merge')">merge</button>
                 Clicking on the merge button will update the runtime configuration to include the lines for the AppDynamics interceptor startup. Please verify that there are no discrepancies <br>i.e. that the sequence numbers 601 & 602 are not already used and that you have not already added these lines to the file above.
               %endif%
               %endinvoke%
@@ -113,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div style="padding: 20px; margin-left: 150px; margin-right: 150px; background-color: lightcyan; text-align: center;">
+    <div style="padding: 20px; margin-left: 150px; margin-right: 150px; background-color: #eee">
       Please remember to configure your AppDynamics configuration via the file <br><br>
       <i>[SAG_HOME]/IntegrationServer/instances/default/packages/WxAppDynamicsAgent/resources/conf/controller-info.xml</i>
       <div style="width: 100%; margin-top: 20px">
@@ -130,7 +126,6 @@
       </div>
     </div>
   </div>
-<form id="form" action=".">
   <script>
   
     var textarea1 = document.getElementById('status');
