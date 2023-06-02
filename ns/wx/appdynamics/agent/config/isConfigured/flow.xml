@@ -74,7 +74,7 @@
   <DATA ENCODING="XMLValues" I18N="true">
 
 <Values version="2.0">
-  <value name="xml">./packages/WxAppDynamicsAgent/resources/ver22.9.0.34210/logs</value>
+  <value name="xml">./packages/WxAppDynamicsAgent/resources/ver23.5.0.34821/logs</value>
   <record name="type" javaclass="com.wm.util.Values">
     <value name="node_type">record</value>
     <value name="node_subtype">unknown</value>
@@ -4827,7 +4827,7 @@
 
   <!-- nodes -->
 
-<MAP NAME="%diffInSeconds% > -1000" TIMEOUT="" MODE="STANDALONE">
+<MAP NAME="%diffInSeconds% > -1500" TIMEOUT="" MODE="STANDALONE">
   <COMMENT></COMMENT>
   <MAPTARGET>
 
@@ -6073,12 +6073,6 @@
 </MAPDELETE>
 
 <MAPDELETE FIELD="/matchedFileName;1;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/logDate;3.9;0">
-</MAPDELETE>
-
-<MAPDELETE FIELD="/upDate;3.9;0">
 </MAPDELETE>
 </MAP>
 </FLOW>

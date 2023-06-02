@@ -1,8 +1,8 @@
 .DS_Store
 /logs
 resources/conf/IS
-resources/ver22.9.0.34210/logs
-resources/ver22.9.0.34210/conf/IS
+resources/ver23.5.0.34821/logs
+resources/ver23.5.0.34821/conf/IS
 *.bak
 *.*.bak
 *.*.*.txt

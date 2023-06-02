@@ -93,7 +93,10 @@
     <credential-store-filename></credential-store-filename>
     <!-- Password for the 'Secure Credential Store' (SCS). This password must be obfuscated. -->
     <credential-store-password></credential-store-password>
-
+    <!-- Format for the 'Secure Credential Store' (SCS).
+    The default format is JCEKS, but if a format like FIPS and a different security provider is chosen,
+    it should be ensured that all other certificates like cacerts also should be in this format -->
+    <credential-store-format></credential-store-format>
     <!-- Enable agent-side mutual authentication with the Controller. Required when the Controller is configured for client authentication -->
     <use-ssl-client-auth>false</use-ssl-client-auth>
     <!-- Asymmetric keystore filename -->
