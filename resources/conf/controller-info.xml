@@ -111,12 +111,12 @@
     <!-- The account name for multi-tenant Controllers.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_ACCOUNT_NAME' or
     the system property '-Dappdynamics.agent.accountName' -->
-    <account-name>semea</account-name>
+    <account-name>****</account-name>
     <!-- The account access key.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY' or
     the system property '-Dappdynamics.agent.accountAccessKey'
     if 'use-encrypted-credentials' is set to true, use the encrypted the account access key. -->
-    <account-access-key>ndwg8khms12t</account-access-key>
+    <account-access-key>*******</account-access-key>
 
     <!-- Change to 'true' only under special circumstances when you want to override this node's application name
     or tier name after this agent has been moved to a new application and/or tier in the Controller UI. When true,
