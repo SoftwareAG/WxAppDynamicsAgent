@@ -1,12 +1,33 @@
 <business-transactions>
-    <time-stamp>1685479797636</time-stamp>
-    <jms-entry-points enabled="true">
+    <time-stamp>1690578209032</time-stamp>
+    <ejb-entry-points enabled="true">
+        <custom/>
+        <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
+            <excludes/>
+            <naming-scheme type="ejb-name-and-method-name"/>
+        </automatic-transaction-discovery>
+    </ejb-entry-points>
+    <web-service-entry-points enabled="true">
         <custom/>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
             <excludes/>
-            <naming-scheme type="destination-name"/>
+            <naming-scheme type="service-name-and-operation-name"/>
         </automatic-transaction-discovery>
-    </jms-entry-points>
+    </web-service-entry-points>
+    <spring-bean-entry-points enabled="true">
+        <custom/>
+        <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
+            <excludes/>
+            <naming-scheme type="bean-id-and-method-name"/>
+        </automatic-transaction-discovery>
+    </spring-bean-entry-points>
+    <pojo-entry-points enabled="true">
+        <custom/>
+        <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
+            <excludes/>
+            <naming-scheme type="fully-qualified-class-name"/>
+        </automatic-transaction-discovery>
+    </pojo-entry-points>
     <servlet-entry-points enabled="true">
         <custom/>
         <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
@@ -170,41 +191,13 @@
             </naming-scheme>
         </automatic-transaction-discovery>
     </servlet-entry-points>
-    <spring-bean-entry-points enabled="true">
-        <custom/>
-        <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
-            <excludes/>
-            <naming-scheme type="bean-id-and-method-name"/>
-        </automatic-transaction-discovery>
-    </spring-bean-entry-points>
-    <ejb-entry-points enabled="true">
-        <custom/>
-        <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
-            <excludes/>
-            <naming-scheme type="ejb-name-and-method-name"/>
-        </automatic-transaction-discovery>
-    </ejb-entry-points>
-    <web-service-entry-points enabled="true">
+    <jms-entry-points enabled="true">
         <custom/>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
             <excludes/>
-            <naming-scheme type="service-name-and-operation-name"/>
+            <naming-scheme type="destination-name"/>
         </automatic-transaction-discovery>
-    </web-service-entry-points>
-    <pojo-entry-points enabled="true">
-        <custom/>
-        <automatic-transaction-discovery enabled="false" resolution="first-entry-point">
-            <excludes/>
-            <naming-scheme type="fully-qualified-class-name"/>
-        </automatic-transaction-discovery>
-    </pojo-entry-points>
-    <struts-action-entry-points enabled="true">
-        <custom/>
-        <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
-            <excludes/>
-            <naming-scheme type="action-name-method-name"/>
-        </automatic-transaction-discovery>
-    </struts-action-entry-points>
+    </jms-entry-points>
     <binary-remoting-entry-points enabled="true">
         <custom/>
         <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
@@ -212,6 +205,13 @@
             <naming-scheme type="simple-class-name-and-method-name"/>
         </automatic-transaction-discovery>
     </binary-remoting-entry-points>
-    <connection-identifier controllerGUID="1685479707"
+    <struts-action-entry-points enabled="true">
+        <custom/>
+        <automatic-transaction-discovery enabled="true" resolution="first-entry-point">
+            <excludes/>
+            <naming-scheme type="action-name-method-name"/>
+        </automatic-transaction-discovery>
+    </struts-action-entry-points>
+    <connection-identifier controllerGUID="1690578117"
         controllerHost="semea.saas.appdynamics.com" controllerPort="443"/>
 </business-transactions>

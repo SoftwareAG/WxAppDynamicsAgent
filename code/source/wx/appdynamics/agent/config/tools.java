@@ -36,9 +36,13 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -385,6 +389,7 @@ public final class tools
 		
 		// process
 		
+		List<String> files = null;
 		int max = -1;
 				
 		try {max = Integer.parseInt(maxLines);} catch (Exception e) {}
@@ -392,24 +397,24 @@ public final class tools
 		if (fname.contains("*")) {
 			// need to find file first
 			File fileNameWithWithCard = new File(fname);
-			File[] files = null;
 			
-			final String match = new File(fname).getName();
+			final String dir = fileNameWithWithCard.isDirectory() ? fileNameWithWithCard.getAbsolutePath() : fileNameWithWithCard.getParentFile().getAbsolutePath();
+			final String filter = fileNameWithWithCard.isDirectory() ? null : fileNameWithWithCard.getName();
 			
-			if (fileNameWithWithCard.isDirectory()) {
-				files = fileNameWithWithCard.listFiles();
-			} else {
-				files = fileNameWithWithCard.getParentFile().listFiles(new FileFilter() {
-					
-					@Override
-					public boolean accept(File pathname) {						
-						return (pathname.getName().matches(match));
-					}
-				});
+			try (Stream<Path> stream = Files.list(Paths.get(dir))) {
+			        files = stream
+			          .filter(file -> filter == null || file.getFileName().toString().matches(filter))
+			          .sorted((f1, f2) -> (int) (f2.toFile().lastModified() - f1.toFile().lastModified()))
+			          //.map(Path::getFileName)
+			          .map(Path::toString)
+			          .collect(Collectors.toList());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
-			if (files != null && files.length > 0) {
-				fname = files[0].getAbsolutePath();
+			if (files != null && files.size() > 0) {
+				fname = files.get(0);
 			}
 			
 		}
@@ -422,6 +427,7 @@ public final class tools
 		IDataUtil.put(pipelineCursor, "matchedFileName", new File(fname).getName());
 		IDataUtil.put(pipelineCursor, "matchedLines", matchedLines);
 		IDataUtil.put(pipelineCursor, "matchedCount", "" + matchedLines.length);
+		
 		pipelineCursor.destroy();
 		
 			

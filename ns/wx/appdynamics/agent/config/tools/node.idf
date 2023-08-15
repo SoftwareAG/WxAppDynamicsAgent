@@ -69,9 +69,13 @@ cHRpb24oZSk7Cgl9CgkJCQoJcmV0dXJuIGRhdGE7Cn0KCQ==</value>
     <value>java.nio.file.attribute.BasicFileAttributes</value>
     <value>java.text.ParseException</value>
     <value>java.util.ArrayList</value>
+    <value>java.util.Comparator</value>
     <value>java.util.Date</value>
     <value>java.util.Enumeration</value>
     <value>java.util.List</value>
+    <value>java.util.Set</value>
+    <value>java.util.stream.Collectors</value>
+    <value>java.util.stream.Stream</value>
     <value>java.util.zip.ZipEntry</value>
     <value>java.util.zip.ZipInputStream</value>
     <value>java.util.zip.ZipOutputStream</value>
