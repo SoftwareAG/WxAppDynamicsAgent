@@ -3,6 +3,7 @@
 resources/conf/IS
 resources/ver23.5.0.34821/logs
 resources/ver23.5.0.34821/conf/IS
+resources/ver23.5.0.34821/conf/IS/ver23.5.0.34821/conf/IS/bcirules.xml
 *.bak
 *.*.bak
 *.*.*.txt
