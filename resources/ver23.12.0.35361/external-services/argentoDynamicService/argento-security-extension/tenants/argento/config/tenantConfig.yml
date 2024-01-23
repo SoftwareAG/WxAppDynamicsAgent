@@ -1,0 +1,407 @@
+tenant-instrumentation:
+
+  #ENCRYPT
+
+  #
+  # This is the core instrumentation out of the box
+  #
+
+  - handler: com.cisco.argento.loadhandlers.BootstrapLoadHandler
+    load: true
+
+  - handler: com.cisco.argento.loadhandlers.SecurityManagerLoadHandler
+    load: true
+
+  - class: java.lang.SecurityManager
+    method: checkPermission
+    handler: com.cisco.argento.methodhandlers.SecurityManagerMethodHandler
+    condition: java.security.manager,argento.use.security.manager.handler
+
+  - class: java.lang.System
+    method: getSecurityManager
+    handler: com.cisco.argento.methodhandlers.SecurityManagerEnablerMethodHandler
+    entrycode: return (SecurityManager)com.cisco.mtagent.boot.instrumentation.MethodEntryAndExit.getReturnBackOverrideObject("sm");
+    condition: argento.use.security.manager.enabler.handler
+
+  - class: javax.servlet.Filter
+    method: doFilter
+    handler: com.cisco.argento.methodhandlers.ServletServiceMethodHandler
+    catch: true
+    interface: true
+    active: false
+
+  - class: java.sql.Statement
+    method: execute,executeQuery,executeUpdate,executeBatch
+    handler: com.cisco.argento.methodhandlers.JDBCMethodHandler
+    interface: true
+    catch: false
+
+  - class: javax.servlet.http.HttpServlet
+    method: service
+    handler: com.cisco.argento.methodhandlers.ServletServiceMethodHandler
+    signature: (Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;)V
+    catch: true
+
+  - class: java.lang.RuntimeException
+    method: RuntimeException
+    handler: com.cisco.argento.methodhandlers.SecurityExceptionMethodHandler
+    entry: false
+
+  - class: javax.net.ssl.SSLException
+    method: SSLException
+    handler: com.cisco.argento.methodhandlers.SecurityExceptionMethodHandler
+    entry: false
+
+  - class: java.security.GeneralSecurityException
+    method: GeneralSecurityException
+    handler: com.cisco.argento.methodhandlers.SecurityExceptionMethodHandler
+    entry: false
+
+  - class: javax.servlet.ServletException
+    method: ServletException
+    handler: com.cisco.argento.methodhandlers.SecurityExceptionMethodHandler
+    catch: false
+    entry: false
+
+  - class: javax.security.auth.login.LoginException
+    method: LoginException
+    handler: com.cisco.argento.methodhandlers.SecurityExceptionMethodHandler
+    entry: false
+
+  - class: java.lang.ProcessBuilder
+    method: start
+    handler: com.cisco.argento.methodhandlers.ProcessBuilderMethodHandler
+
+  #
+  # Reflection Tracking - Misc test with AccessController - both disabled for now
+  #
+
+  - class: java.security.AccessController
+    method: checkPermission
+    handler: com.cisco.argento.methodhandlers.GenericTraceMethodHandler
+    active: false
+
+  - class: java.lang.reflect.AccessibleObject
+    method: setAccessible
+    handler: com.cisco.argento.methodhandlers.ReflectionMethodHandler
+    interface: true
+    active: false
+
+  #
+  # Socket Level Instrumentation - requires a property to enable - argento.use.socket.tracing.handler
+  #
+
+  - class: java.net.SocketImpl
+    method: connect
+    handler: com.cisco.argento.methodhandlers.SocketConnectMethodHandler
+    interface: true
+    excludeclass: java.net.SocksSocketImpl
+    condition: argento.use.socket.tracing.handler
+
+  - class: java.net.Socket
+    method: connect
+    handler: com.cisco.argento.methodhandlers.SocketConnectMethodHandler
+    condition: argento.use.socket.tracing.handler
+
+  - class: java.net.ServerSocket
+    method: accept
+    handler: com.cisco.argento.methodhandlers.SocketAcceptMethodHandler
+    condition: argento.use.socket.tracing.handler
+
+  - class: java.nio.channels.ServerSocketChannel
+    method: accept
+    handler: com.cisco.argento.methodhandlers.SocketAcceptMethodHandler
+    signature: ()Ljava/nio/channels/SocketChannel;
+    interface: true
+    condition: argento.use.socket.tracing.handler
+
+  - class: java.net.URL
+    method: openConnection
+    handler: com.cisco.argento.methodhandlers.URLConnectionMethodHandler
+    condition: argento.use.socket.tracing.handler,multi.tenant.agent.unit.testing
+
+  #
+  # Serialization Instrumentation - some disabled right now
+  #
+
+  - class: java.io.Serializable
+    method: readObject
+    handler: com.cisco.argento.methodhandlers.SerializableMethodHandler
+    signature: (Ljava/io/ObjectInputStream;)V
+    interface: true
+    active: false
+
+  - class: java.io.ObjectInputStream
+    method: readObject
+    handler: com.cisco.argento.methodhandlers.SerializableMethodHandler
+    active: false
+
+  - class: java.io.ObjectInputStream
+    method: resolveClass
+    handler: com.cisco.argento.methodhandlers.SerializableMethodHandler
+
+ #
+ # Log4j2 Instrumentation
+ #
+
+# standard log4j2
+
+  - class: org.apache.logging.log4j.spi.AbstractLogger
+    method: logMessage
+    handler: com.cisco.argento.methodhandlers.Log4jMethodHandler
+    active: false
+
+# juli - java.util.logging.Formatter
+
+  - class: java.util.logging.Formatter
+    method: formatMessage
+    handler: com.cisco.argento.methodhandlers.Log4jMethodHandler
+    active: false
+
+  #
+  # Unit Test Instrumentation - for testing
+  #
+
+  - class: com.company.AgentInstrumentationTest$InterfaceClassInterface
+    method: executeInterface
+    handler: com.cisco.argento.methodhandlers.UnitTestMethodHandler
+    interface: true
+    catch: true
+    condition: multi.tenant.agent.unit.testing
+
+  - class: com.company.AgentInstrumentationTest$InstrumentClass
+    method: executeDirect
+    handler: com.cisco.argento.methodhandlers.UnitTestMethodHandler
+    condition: multi.tenant.agent.unit.testing
+
+  - class: com.company.AgentInstrumentationTest$InstrumentClass
+    method: annotate:com.company.AgentInstrumentationTestAnnotations$MethodAnnotation
+    handler: com.cisco.argento.methodhandlers.UnitTestMethodHandler
+    catch: true
+    condition: multi.tenant.agent.unit.testing
+
+  - class: com.company.AgentInstrumentationReturnBackTest
+    method: returnBackTest
+    handler: com.cisco.argento.methodhandlers.UnitTestReturnBackMethodHandler
+    entrycode: return (String)com.cisco.mtagent.boot.instrumentation.MethodEntryAndExit.getReturnBackOverrideObject("unit-test-value");
+    condition: multi.tenant.agent.unit.testing
+
+  - class: com.company.AgentInstrumentationDynamicTest
+    method: executeMethodStatic
+    handler: com.cisco.argento.methodhandlers.UnitTestReturnDynamicInstrumentationHandler
+    condition: multi.tenant.agent.unit.testing
+    id: dynamic-unit-test
+
+  - class: com.company.ServletHandlerTest$UTServlet
+    method: doGet
+    handler: com.cisco.argento.methodhandlers.UnitTestDelegateMethodHandler1,com.cisco.argento.methodhandlers.UnitTestDelegateMethodHandler2
+    catch: true
+    condition: multi.tenant.agent.unit.testing
+    delegate: true
+    load-from: argento-tenant.jar
+
+  - class: com.company.ServletHandlerTest$UTServlet
+    method: doGet
+    handler: com.cisco.argento.methodhandlers.UnitTestDelegateMethodHandler3
+    catch: true
+    condition: multi.tenant.agent.unit.testing
+    delegate: true
+    load-from: argento-tenant.jar
+
+  - class: com.company.ServletHandlerTest$UTServlet
+    method: doGetCall
+    handler: com.cisco.argento.methodhandlers.UnitTestMethodHandler1
+    catch: true
+    condition: multi.tenant.agent.unit.testing
+
+  - class: com.company.ServletHandlerTest$UTServlet
+    method: doGetCall
+    handler: com.cisco.argento.methodhandlers.UnitTestMethodHandler2
+    catch: true
+    condition: multi.tenant.agent.unit.testing
+
+
+
+
+tenant-reflection-list:
+
+  #ENCRYPT
+
+  - name: agentEntry
+    script: com.singularity.ee.agent.appagent.AgentEntryPoint
+
+  - name: javaAgent
+    script: agentEntry.getJavaAgent()
+
+  - name: kernel
+    script: agentEntry.getJavaAgent().getKernel()
+
+  - name: lifecycleMgr
+    script: kernel.getLifeCycleManager()
+
+  - name: injector
+    script: lifecycleMgr.getInjector()
+
+  - name: instrumentation-handle
+    script: javaAgent.getInstrumentation()
+
+  - name: install-dir
+    script: javaAgent.getAgentInstallDir()
+
+  - name: version
+    script: javaAgent.getAgentVersion()
+
+  - name: logs
+    script: kernel.getLogsDir()
+
+  - name: schedulerManager
+    script: kernel.getAgentSchedulerManager()
+
+  - name: configManager
+    script: kernel.getConfigManager()
+
+  - name: getTruststore
+    script: configManager.getTrustStore()
+
+  - name: configurationChannel
+    script: kernel.getConfigurationChannel()
+
+  - name: configDir
+    script: configurationChannel.getConfDir()
+
+  - name: controllerHost
+    script: configurationChannel.getControllerHost()
+
+  - name: controllerPort
+    script: configurationChannel.getControllerPort()
+
+  - name: controllerVersion
+    script: configurationChannel.getControllerVersion()
+
+  - name: tierId
+    script: configurationChannel.getComponentID()
+
+  - name: nodeId
+    script: configurationChannel.getNodeID()
+
+  - name: applicationId
+    script: configurationChannel.getApplicationID()
+
+  - name: vendorId
+    script: configurationChannel.getVendorID()
+
+  - name: serverID
+    script: configurationChannel.getServerID()
+
+  - name: accountGUID
+    script: configurationChannel.getAccountGUID()
+
+  - name: controllerGUID
+    script: configurationChannel.getControllerGUID()
+
+  - name: accountKey
+    script: configurationChannel.getAccountKey()
+
+  - name: accountAccessKey
+    script: com.singularity.ee.agent.AgentAccountInfoStore.getInstance().getAccountAccessKey()
+
+  - name: agentProperties
+    script: kernel.getAgentProperties()
+
+  - name: services
+    script: lifecycleMgr.getRunningServices()
+
+  - name: eventHandler
+    script: lifecycleMgr.getEventHandler()
+
+  - name: metricAndEventPublisher
+    script: lifecycleMgr.getMetricAndEventPublisher()
+
+  - name: BCIEngineService
+    script: injector.getBCIEngineService()
+
+  - name: transactionMonitorService
+    script: injector.getTransactionMonitorService()
+
+  - name: transactionSnapshotService
+    script: injector.getTransactionSnapshotService()
+
+  - name: transactionThreadLocalManager
+    script: injector.getThreadLocalManager()
+
+  - name: currentBT
+    script: transactionThreadLocalManager.getThreadLocalBTContextForCurrentThread()
+
+  - name: currentTransactionContext
+    script: currentBT.getCurrentTransaction()
+
+  - name: currentSnapshot
+    script: currentTransactionContext.getSnapshot()
+
+  - name: callerComponentList
+    script: currentTransactionContext.getCallerComponentList()
+
+  - name: headerChain
+    script: currentTransactionContext.getHeaderChain()
+
+  - name: transactionId
+    script: currentTransactionContext.getTransactionIdentifier()
+
+  - name: requestGUID
+    script: currentTransactionContext.getRequestGUID()
+
+  - name: businessTransaction
+    script: currentTransactionContext.getTransaction()
+
+  - name: btId
+    script: businessTransaction.getId()
+
+  - name: currentRequestContext
+    script: currentBT.getCurrentRequestContext()
+
+  - name: currentEUMContext
+    script: currentBT.getEUMContext()
+
+  - name: clientRequestGUID
+    script: currentEUMContext.getClientRequestGUID()
+
+  - name: currentRequestContextfromEUM
+    script: currentEUMContext.getCurrentRequestContext()
+
+  - name: currentTransactionContextFromEUM
+    script: currentEUMContext.getCurrentTransactionContext()
+
+  - name: globalAccountName
+    script: currentEUMContext.getGlobalAccountName()
+
+  - name: currentCorrelationHeader
+    script: currentBT.getCorrelationHeader()
+
+  - name: entryPointType
+    script: currentRequestContext.getEntryPointType()
+
+  - name: businessTransactionType
+    script: currentRequestContext.getBusinessTransactionType()
+
+  - name: requestDataStore
+    script: currentRequestContext.getRequestDataStore()
+
+  - name: id
+    script: currentRequestContext.getId()
+
+  - name: agentEnabled
+    script: configurationChannel.isAgentEnabled()
+
+  - name: agentRegistered
+    script: configurationChannel.isRegistered()
+
+#END-ENCRYPTION
+
+tenant-specific-instrumentation-properties:
+  preloadClasses: java.lang.ProcessBuilder
+  noTransformClass: com.cisco.mtagent,com.cisco.argento,com.singularity,com.appdynamics
+  noTransformLoaderClassName: com.cisco.mtagent,com.cisco.argento,com.singularity,com.appdynamics
+  noTransformThreadName: Multi-Tenant-Agent-Initialization-Thread
+  classReviewInterval: 10
+  customMethodHandlerBuilderClass: com.cisco.argento.core.ArgentoPicoContainer
+  condition: "!argento.vulnerability.assessment.only"

@@ -119,7 +119,7 @@
         Set the following environment variables to identify this server in your AppDynamics environment; APPDYNAMICS_AGENT_APPLICATION_NAME, APPDYNAMICS_AGENT_TIER_NAME and APPDYNAMICS_AGENT_NODE_NAME. Attention, the node name must be unique, by default it is set to ${host.name}.wm.
       </div>
       <div style="margin-top: 20px">
-        This package is using the AppDynamics agent iSDK version 23.5.0.34821, documentation is at <a href="https://docs.appdynamics.com/22.12/en/application-monitoring/install-app-server-agents/java-agent/use-the-java-agent-api-and-instrumentation-sdk/isdk-overview">https://docs.appdynamics.com/22.12/en/application-monitoring/install-app-server-agents/java-agent/use-the-java-agent-api-and-instrumentation-sdk/isdk-overview</a>
+        This package is using the AppDynamics agent iSDK version 23.12.0.35361, documentation is at <a href="https://docs.appdynamics.com/22.12/en/application-monitoring/install-app-server-agents/java-agent/use-the-java-agent-api-and-instrumentation-sdk/isdk-overview">https://docs.appdynamics.com/22.12/en/application-monitoring/install-app-server-agents/java-agent/use-the-java-agent-api-and-instrumentation-sdk/isdk-overview</a>
       </div>
       <div style="margin-top: 20px">
         Sign up for AppDynamics free trial at <a href="https://www.appdynamics.com/free-trial/">https://www.appdynamics.com/free-trial/</a>
