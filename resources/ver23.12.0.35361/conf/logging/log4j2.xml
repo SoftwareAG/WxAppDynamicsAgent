@@ -49,7 +49,7 @@
             <AppenderRef ref="DefaultAppender"/>
             <AppenderRef ref="RESTAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.BusinessTransactions" level="info" additivity="false">
+        <AsyncLogger name="com.singularity.BusinessTransactions" level="debug" additivity="false">
             <AppenderRef ref="BusinessTransactionsLogger" />
         </AsyncLogger>
         <AsyncLogger name="com.singularity.dynamicservice" level="info" additivity="false">
@@ -68,6 +68,21 @@
             <AppenderRef ref="APIAppender"/>
         </AsyncLogger>
         <AsyncLogger name="com.singularity.segment.TxnTracer" level="info" additivity="false">
+            <AppenderRef ref="DefaultAppender"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceInterceptor" level="debug" additivity="false">
+            <AppenderRef ref="DefaultAppender"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceDataExtractor" level="debug" additivity="false">
+            <AppenderRef ref="DefaultAppender"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchInterceptor" level="trace" additivity="false">
+            <AppenderRef ref="DefaultAppender"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchOutInterceptor" level="debug" additivity="false">
+            <AppenderRef ref="DefaultAppender"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchExtractor" level="trace" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
         <Root level="error">
