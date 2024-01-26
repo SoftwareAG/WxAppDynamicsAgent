@@ -91,7 +91,9 @@
         <AsyncLogger name="com.singularity.instrumentation.sdk.HttpContextInterceptor" level="trace" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-
+        <AsyncLogger name="com.singularity.instrumentation.sdk.WmInterceptor" level="trace" additivity="false">
+            <AppenderRef ref="DefaultAppender"/>
+        </AsyncLogger>
         <Root level="error">
             <AppenderRef ref="DefaultAppender"/>
         </Root>
