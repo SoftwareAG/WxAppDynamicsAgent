@@ -76,22 +76,22 @@
         <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceDataExtractor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchInterceptor" level="trace" additivity="false">
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchInterceptor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
         <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchOutInterceptor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchExtractor" level="trace" additivity="false">
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchExtractor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.instrumentation.sdk.ISServerManagerInterceptor" level="trace" additivity="false">
+        <AsyncLogger name="com.singularity.instrumentation.sdk.ISServerManagerInterceptor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.instrumentation.sdk.HttpContextInterceptor" level="trace" additivity="false">
+        <AsyncLogger name="com.singularity.instrumentation.sdk.HttpContextInterceptor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.instrumentation.sdk.WmInterceptor" level="trace" additivity="false">
+        <AsyncLogger name="com.singularity.instrumentation.sdk.WmInterceptor" level="debug" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
         <Root level="error">
