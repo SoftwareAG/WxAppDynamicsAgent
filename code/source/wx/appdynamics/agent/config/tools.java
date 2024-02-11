@@ -231,13 +231,13 @@ public final class tools
 		String childName = null;
 		
 		if (isDir) {
-			String[] files = new File(fname).list();
-			
-			if (files.length > 0) {
-				childName = files[files.length-1];
-			} else {
-				exists = false;
-			}
+		String[] files = new File(fname).list();
+		
+		if (files.length > 0) {
+		childName = files[files.length-1];
+		} else {
+		exists = false;
+		}
 		}
 		
 		// pipeline out
@@ -245,11 +245,11 @@ public final class tools
 		IDataUtil.put(pipelineCursor, "exists", "" + exists);
 		
 		if (exists) {
-			IDataUtil.put(pipelineCursor, "isDir", "" + isDir);
-			
-			if (childName != null) {
-				IDataUtil.put(pipelineCursor, "found", new File(new File(fname), childName).getPath());
-			}
+		IDataUtil.put(pipelineCursor, "isDir", "" + isDir);
+		
+		if (childName != null) {
+		IDataUtil.put(pipelineCursor, "found", new File(new File(fname), childName).getPath());
+		}
 		}
 		
 		pipelineCursor.destroy();
