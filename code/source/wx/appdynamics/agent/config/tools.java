@@ -223,7 +223,7 @@ public final class tools
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		String	fname = IDataUtil.getString(pipelineCursor, "fname");
 		
-		// process
+		// proces
 		
 		boolean exists = new File(fname).exists();
 		boolean isDir = new File(fname).isDirectory();

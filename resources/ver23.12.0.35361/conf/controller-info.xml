@@ -17,7 +17,7 @@
     This is the same host that you use to access the AppDynamics Controller user interface.
     You can override this configuration with an environment variable 'APPDYNAMICS_CONTROLLER_HOST_NAME' or
     the system property '-Dappdynamics.controller.hostName' -->
-    <controller-host></controller-host>
+    <controller-host>semea.saas.appdynamics.com</controller-host>
 
     <!-- The http(s) port of the AppDynamics Controller. If 'controller-ssl-enabled' below is set to true, you must
     specify the HTTPS port of the Controller, otherwise specify the HTTP port. The Controller listens on port 8090 by default.
@@ -26,7 +26,7 @@
     This is the same port that you use to access the AppDynamics Controller user interface.
     You can override this configuration with an environment variable 'APPDYNAMICS_CONTROLLER_PORT' or
     the system property '-Dappdynamics.controller.port' -->
-    <controller-port></controller-port>
+    <controller-port>443</controller-port>
 
     <!-- Connect to the Controller using SSL(HTTPS). If you set this to true,
     set the controller-port property to the HTTPS port for the Controller.
@@ -34,7 +34,7 @@
     agent connects to the Controller using HTTP.
     You can override this configuration with an environment variable 'APPDYNAMICS_CONTROLLER_SSL_ENABLED' or
     the system property '-Dappdynamics.controller.ssl.enabled' -->
-    <controller-ssl-enabled></controller-ssl-enabled>
+    <controller-ssl-enabled>true</controller-ssl-enabled>
 
     <!-- Truncate the hostname to remove the domain name.
     For example, 'server.mydomain.com' becomes 'server'. Hostnames with no domain remain unchanged.
@@ -48,7 +48,7 @@
     the Controller creates one automatically.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_APPLICATION_NAME' or
     the system property '-Dappdynamics.agent.applicationName' -->
-    <application-name></application-name>
+    <application-name>WM-IS</application-name>
 
     <!-- The logical business tier this node belongs to.
     For example, a tier can be 'ACME Frontend' or 'ACME Backend Service' etc.
@@ -57,7 +57,7 @@
     You can use expressions like ${server.tier}_${some.property}.MyTier to define the tier name.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_TIER_NAME' or
     the system property '-Dappdynamics.agent.tierName' -->
-    <tier-name></tier-name>
+    <tier-name>default</tier-name>
 
     <!-- Unique name for this jvm node. The name must be unique within the business application. e.g. weblogicinstance23 or
     hweb24. If your JVM / appserver startup script contains a system property that you want to use for the node name,
@@ -66,7 +66,7 @@
     You can use expressions like ${server.name}_${host.name}.MyNode to define the node name.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_NODE_NAME' or
     the system property '-Dappdynamics.agent.nodeName' -->
-    <node-name></node-name>
+    <node-name>DEV</node-name>
 
     <!-- The runtime directory for all runtime files (logs, transaction configuration) for agent nodes using this agent
     installation. This optional property defaults to the agent-installation-directory . If you specify a different directory,
@@ -111,12 +111,12 @@
     <!-- The account name for multi-tenant Controllers.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_ACCOUNT_NAME' or
     the system property '-Dappdynamics.agent.accountName' -->
-    <account-name></account-name>
+    <account-name>semea</account-name>
     <!-- The account access key.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY' or
     the system property '-Dappdynamics.agent.accountAccessKey'
     if 'use-encrypted-credentials' is set to true, use the encrypted the account access key. -->
-    <account-access-key></account-access-key>
+    <account-access-key>ndwg8khms12t</account-access-key>
 
     <!-- Change to 'true' only under special circumstances when you want to override this node's application name
     or tier name after this agent has been moved to a new application and/or tier in the Controller UI. When true,
