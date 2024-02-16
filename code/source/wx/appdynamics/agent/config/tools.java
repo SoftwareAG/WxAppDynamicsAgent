@@ -223,7 +223,7 @@ public final class tools
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		String	fname = IDataUtil.getString(pipelineCursor, "fname");
 		
-		// proces
+		// process
 		
 		boolean exists = new File(fname).exists();
 		boolean isDir = new File(fname).isDirectory();
@@ -326,7 +326,7 @@ public final class tools
 		String ignoreError = IDataUtil.getString(c, "ignoreError");
 		
 		if (fname == null)
-			throw new ServiceException("provide file name please");
+		throw new ServiceException("provide file name please");
 		
 		// process
 		
@@ -334,17 +334,17 @@ public final class tools
 		InputStream in = null;
 		
 		try {
-			if (loadAs != null && loadAs.equalsIgnoreCase("stream")) {
-				in = new FileInputStream(new File(fname));
-			} else {
-				data = Files.readAllBytes(Paths.get(fname));
-			}
+		if (loadAs != null && loadAs.equalsIgnoreCase("stream")) {
+		in = new FileInputStream(new File(fname));
+		} else {
+		data = Files.readAllBytes(Paths.get(fname));
+		}
 		} catch (NoSuchFileException e ) {
-			if (ignoreError == null || !ignoreError.equalsIgnoreCase("true"))
-				throw new ServiceException(e);
+		if (ignoreError == null || !ignoreError.equalsIgnoreCase("true"))
+		throw new ServiceException(e);
 		} catch (IOException e) {
-			
-			throw new ServiceException(e);
+		
+		throw new ServiceException(e);
 		}
 		
 		// pipeline out
@@ -352,14 +352,14 @@ public final class tools
 		IDataUtil.put(c, "name", new File(fname).getName());
 		
 		if (data != null) {
-			
-			if (loadAs != null && loadAs.equalsIgnoreCase("string"))
-				IDataUtil.put(c, "string", new String(data));
-			else
-				IDataUtil.put(c, "bytes", data);
-			c.destroy();
+		
+		if (loadAs != null && loadAs.equalsIgnoreCase("string"))
+		IDataUtil.put(c, "string", new String(data));
+		else
+		IDataUtil.put(c, "bytes", data);
+		c.destroy();
 		} else {
-			IDataUtil.put(c, "stream", in);
+		IDataUtil.put(c, "stream", in);
 		}
 		// --- <<IS-END>> ---
 

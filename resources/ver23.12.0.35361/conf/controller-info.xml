@@ -17,7 +17,7 @@
     This is the same host that you use to access the AppDynamics Controller user interface.
     You can override this configuration with an environment variable 'APPDYNAMICS_CONTROLLER_HOST_NAME' or
     the system property '-Dappdynamics.controller.hostName' -->
-    <controller-host>semea.saas.appdynamics.com</controller-host>
+    <controller-host>monroe2022042722442316.saas.appdynamics.com</controller-host>
 
     <!-- The http(s) port of the AppDynamics Controller. If 'controller-ssl-enabled' below is set to true, you must
     specify the HTTPS port of the Controller, otherwise specify the HTTP port. The Controller listens on port 8090 by default.
@@ -48,7 +48,7 @@
     the Controller creates one automatically.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_APPLICATION_NAME' or
     the system property '-Dappdynamics.agent.applicationName' -->
-    <application-name>WM-IS</application-name>
+    <application-name>WM_IS</application-name>
 
     <!-- The logical business tier this node belongs to.
     For example, a tier can be 'ACME Frontend' or 'ACME Backend Service' etc.
@@ -111,12 +111,12 @@
     <!-- The account name for multi-tenant Controllers.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_ACCOUNT_NAME' or
     the system property '-Dappdynamics.agent.accountName' -->
-    <account-name>semea</account-name>
+    <account-name>monroe2022042722442316</account-name>
     <!-- The account access key.
     You can override this configuration with an environment variable 'APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY' or
     the system property '-Dappdynamics.agent.accountAccessKey'
     if 'use-encrypted-credentials' is set to true, use the encrypted the account access key. -->
-    <account-access-key>ndwg8khms12t</account-access-key>
+    <account-access-key>h0zb06ln3ipi</account-access-key>
 
     <!-- Change to 'true' only under special circumstances when you want to override this node's application name
     or tier name after this agent has been moved to a new application and/or tier in the Controller UI. When true,

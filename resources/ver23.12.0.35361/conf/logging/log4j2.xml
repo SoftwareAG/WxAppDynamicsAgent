@@ -70,7 +70,7 @@
         <AsyncLogger name="com.singularity.segment.TxnTracer" level="info" additivity="false">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
-        <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceInterceptor" level="debug" additivity="false">
+        <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceInterceptor" level="trace" additivity="true">
             <AppenderRef ref="DefaultAppender"/>
         </AsyncLogger>
         <AsyncLogger name="com.singularity.instrumentation.sdk.ServiceDataExtractor" level="debug" additivity="false">
