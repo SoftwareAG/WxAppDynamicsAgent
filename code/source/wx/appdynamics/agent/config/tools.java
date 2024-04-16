@@ -81,18 +81,18 @@ public final class tools
 		// process
 		
 		if (separator == null)
-			separator = System.lineSeparator();
+		separator = System.lineSeparator();
 		
 		String out = "";
 		
 		if (list != null) {
-			
-			for(Object o : list) {
-				out += "\"" + o.toString() + "\"" + separator;
-			}
-			
-			if (list.length > 0)
-				out = out.substring(0, out.length()-1);
+		
+		for(Object o : list) {
+		out += "\"" + o.toString() + "\"" + separator;
+		}
+		
+		if (list.length > 0)
+		out = out.substring(0, out.length()-1);
 		}
 		
 		// pipeline out
