@@ -4,7 +4,7 @@
   <value name="enabled">yes</value>
   <value name="system_package">no</value>
   <value name="version">2.0</value>
-  <value name="build">250</value>
+  <value name="build">251</value>
   <value name="description">Embedded AppDynamics agent to ensure service tracing in AppDynamics</value>
   <value name="source_server_version">10.11</value>
   <null name="startup_services"/>
@@ -30,7 +30,8 @@
     </record>
     <record javaclass="com.wm.util.Values">
       <value name="key">tags</value>
-      <value name="value"></value>
+      <value name="value">analytics,monitoring,appdynamics</value>
     </record>
   </array>
+  <null name="target_server_version"/>
 </Values>
