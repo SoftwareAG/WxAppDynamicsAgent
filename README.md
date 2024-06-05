@@ -75,6 +75,42 @@ You can sign up for a free AppDynamics account here
 
 [AppDynamics free trial signup page](https://www.appdynamics.com/free-trial/)
 
+# Internal changes
+
+The file WxAppDynamicsAgent/resources/ver24.5.0.36037/conf/app-agent-config.xml has been update to include all of the built SDK wm interceptors
+
+```
+<custom-exclude filter-type="STARTSWITH" filter-value="com/wm/"/> 
+```
+
+The file  WxAppDynamicsAgent/resources/ver24.5.0.36037/conf/logging/log4j2.xml has the following custom loggers added to allow this plugin to be logged
+```
+<AsyncLogger name="com.singularity.instrumentation.sdk.ServiceInterceptor" level="trace" additivity="true">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.ServiceDataExtractor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchInterceptor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchOutInterceptor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.HTTPRevInvokeDispatchExtractor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.ISServerManagerInterceptor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.HttpContextInterceptor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+<AsyncLogger name="com.singularity.instrumentation.sdk.WmInterceptor" level="debug" additivity="false">
+	<AppenderRef ref="DefaultAppender"/>
+</AsyncLogger>
+```
+
 # ADVANCED USE
 
 Use the following environment variables as follows

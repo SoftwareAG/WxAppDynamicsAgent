@@ -1,11 +1,11 @@
 .DS_Store
 /logs
 resources/conf/IS
-resources/ver23.12.0.35361/logs
-resources/ver23.12.0.35361/conf/IS
-resources/ver23.12.0.35361/conf/IS/ver23.12.0.35361/conf/IS/bcirules.xml
-resources/ver23.12.0.35361/external-services
-resources/ver23.12.0.35361/conf/controller-info.xml
+resources/ver24.5.0.36037/logs
+resources/ver24.5.0.36037/conf/DEV
+resources/ver24.5.0.36037/conf/DEV/bcirules.xml
+resources/ver24.5.0.36037/external-services
+resources/ver24.5.0.36037/conf/controller-info.xml.bak
 *.bak
 *.*.bak
 *.*.*.txt
