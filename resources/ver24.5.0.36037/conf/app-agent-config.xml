@@ -197,7 +197,7 @@
                 <bci-processing-excludes>
                     <!-- override-system-exclude is used to whitelist classes (e.g. 'com.sun.jersey') for instrumentation despite a blacklist ('com.sun.*') -->
                     <!-- override-system-exclude filter-type="equals" filter-value="foo"/-->
-                    <custom-exclude filter-type="STARTSWITH" filter-value="com/wm/"/> 
+                    <!-- <custom-exclude filter-type="STARTSWITH" filter-value="com/wm/"/> -->
                     <custom-exclude filter-type="CONTAINS" filter-value="$JaxbAccessor"/>
                     <custom-exclude filter-type="CONTAINS" filter-value="$$FastClassByCGLIB"/>
                     <custom-exclude filter-type="CONTAINS" filter-value="$$EnhancerByGuice$$"/>
